@@ -1,0 +1,128 @@
+let prompt = require("prompt-sync")();
+let arrra = [];
+let resol = [];
+let estu = [];
+// array para armazenar as atividades 
+let contador = 1;
+arrra.unshift(1)
+resol.unshift(1)
+//para que o contador de atividades inicie em 1 
+
+console.log("----------------------------------------------------------------")
+console.log("                           Diario                               ")
+console.log("----------------------------------------------------------------")
+
+while(contador <= 100) {
+
+console.log("=-=-=-=-=--=-=MENU-=-=-=-=-=-=-=")
+console.log("escrever uma atividade       [1]")
+console.log("visualizar paginas do diario [2]")
+let menu = parseInt(prompt("escolha uma função: "))
+
+//seletor de funções
+if (menu === 1){
+  console.log(escreve())
+}else if(menu === 2){
+  console.log(escolhe())
+}
+
+  // função para visualizar as atividades já feitas
+function escolhe(){
+  let perg = parseInt(prompt("escolha o número da atividade: "));
+
+  console.log(arrra[perg]);
+  console.log("")
+  console.log("=-=-=-Relatorio diario-=-=-=")
+  console.log(resol[perg]);
+  console.log(resol[2])
+}
+// função para escrever as atividades
+function escreve(){
+
+  let diario = {
+    exercixio: "",
+    estudo: "",
+    eprocastina: "",
+    dia: "",
+    mes: "",
+    ano: "",
+    nota: "",
+  };
+
+
+//função para criar novo objeto 
+  function Diar(exercicio, estudo, dia, mes, ano, nota) {
+    this.exercicio = exercicio;
+    this.estudo = estudo;
+    this.dia = dia;
+    this.mes = mes;
+    this.ano = ano;
+    this.nota = nota
+  }
+//perguntas sobre exercicios fisicos
+  let aH = 0
+  let aM = 0
+  let a = prompt("Fez algum exercicio físico hoje? [S/N]: ")
+    if (a === "s" || a === "S"){
+        aH = parseInt(prompt("quantas horas de atividade: "))
+        aM = parseInt(prompt("quantos minutos de atividade: "))
+    } 
+    else {
+      aH = 0
+      aM = 0
+    }
+  let exerT = aM + (aH * 60)
+  let treino = ""
+    if (exerT < 60){
+      treino = "você treinou menos de uma hora nesse dia, tente se esforçar mais da proxima vez!"
+    } 
+    else if (exerT > 120){
+      treino = "você treinou mais de duas horas nesse dia, deve ter cuidado com lesões!"
+    }
+    else if (exerT = 0) {
+      treino = "você não treinou hoje, treinar o corpo de alguma forma, seja com exercicios ou esportes ajuda no desenvolvimento cognitivo, tente começar!"
+    }
+    else {
+      treino = "você treinou mais de uma hora nesse dia, foi um bom esforço fisíco!"
+    }
+  //perguntas sobre estudo
+  let cH = 0
+  let cM = 0
+  let c = prompt("em algum momento do dia você estudou? [S/N]: ")
+  if (c === "s" || c === "S"){
+    cH = parseInt(prompt("quantas horas de estudo: "))
+    cM = parseInt(prompt("quantos minutos de estudo: "))
+  } 
+  else {
+  cH = 0
+  cM = 0
+  }
+  let estudT = cM + (cH * 60)
+  let est = ""
+  if (estudT < 120){
+  est = "você estudou menos de duas horas nesse dia, o estudo é muito importante para a nossa vida, tente procurar tecnicas para aprimorar seu aprendizado!"
+  } 
+  else if (estudT > 300){
+  est = "você estudou mais de cinco horas nesse dia, um ótimo desempenho estudantil"
+  }
+    else if (estudT = 0) {
+  est = "você não estudou, 'estudar é para a mente o que a pedra é para a espada!' Tente começar."
+    }
+  else {
+  est = "você estudou mais de duas horas nesse dia, foi um tempo de estudo razoavel!"
+  }
+  //data
+  let d = parseInt(prompt("digite o dia: "))
+  let e = parseInt(prompt("digite o mês: "))
+  let f = parseInt(prompt("digite o ano: "))
+  let g = prompt("se desejar, descreva o dia de hoje: ")
+
+ let MeuOutroDia = new Diar(a, c, d, e, f, g);
+//enviando as informações para os arrays
+  arrra.push(MeuOutroDia)
+  resol.push(treino)
+  resol.push(est)
+}
+
+  contador = contador + 1;
+}
